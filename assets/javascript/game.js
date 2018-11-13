@@ -4,7 +4,7 @@ const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth",
 // Holds the score
 var wins = 0;
 var losses = 0;
-var guesses = 12;
+var guesses = 0;
 
 // Variables that hold text to display
 var wordText = document.getElementById("word-text");
@@ -34,9 +34,15 @@ document.onkeyup = function(event) {
         wordLetters[wordChoice.indexOf(userGuess)] = userGuess;
         console.log(wordLetters);
     } else {
+
+        if(wrongGuesses.indexOf(userGuess) > -1) {
+            //if the letter was already guessed before, do nothing
+        }
+        else {
         wrongGuesses.push(userGuess);
-        guesses = guesses - 1;
+        guesses = guesses + 1;
         console.log(wrongGuesses);
-        guessesLeftText.textContent = guesses;
+        guessesLeftText.textContent = 12 - guesses;
+        }
     }
 }
