@@ -16,6 +16,8 @@ var lossesText = document.getElementById("losses-text");
 document.onkeyup = function(event) {
     var userGuess = event.key;
 
-    console.log(userGuess);
+    var wordChoice = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+
+    console.log(wordChoice);
 
 }
