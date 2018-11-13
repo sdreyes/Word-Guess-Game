@@ -21,7 +21,7 @@ var wordLetters = [];
 var wrongGuesses =[];
 
 //creates an array of under scores to show how many letters are in the word the user needs to guess
-for (var i=0; i < wordChoice.length; i++) {
+for (var i = 0; i < wordChoice.length; i++) {
     wordLetters.push("_");
 }
 console.log(wordLetters);
@@ -33,20 +33,42 @@ document.onkeyup = function(event) {
     var letter = event.key;
     var userGuess = letter.toLowerCase();
 
-    if(wordChoice.indexOf(userGuess) > -1) {
-        wordLetters[wordChoice.indexOf(userGuess)] = userGuess;
-        console.log(wordLetters);
-        wordText.textContent = wordLetters.join(" ");
-    } else {
 
-        if(wrongGuesses.indexOf(userGuess) > -1) {
-            //if the letter was already guessed before, do nothing
-        }
-        else {
-        wrongGuesses.push(userGuess);
-        guesses = guesses + 1;
-        console.log(wrongGuesses);
-        guessesLeftText.textContent = 12 - guesses;
+    for (var j = 0; j < wordChoice.length; j++) {
+        if (wordChoice[j] == userGuess) {
+            wordLetters[j] = userGuess
+            wordText.textContent = wordLetters.join(" ");
         }
     }
+
+    if (wordChoice.indexOf(userGuess) == -1) {
+
+        if (wrongGuesses.indexOf(userGuess) > -1) {
+            //do nothing!
+        }
+        else {
+            wrongGuesses.push(userGuess);
+            guesses = guesses + 1;
+            guessesLeftText.textContent = 12 - guesses;
+            wrongGuessesText.textContent = wrongGuesses.join(" ");
+        }
+    }
+
+
+    // if(wordChoice.indexOf(userGuess) > -1) {
+    //     wordLetters[wordChoice.indexOf(userGuess)] = userGuess;
+    //     console.log(wordLetters);
+    //     wordText.textContent = wordLetters.join(" ");
+    // } else {
+
+    //     if(wrongGuesses.indexOf(userGuess) > -1) {
+    //         //if the letter was already guessed before, do nothing
+    //     }
+    //     else {
+    //     wrongGuesses.push(userGuess);
+    //     guesses = guesses + 1;
+    //     console.log(wrongGuesses);
+    //     guessesLeftText.textContent = 12 - guesses;
+    //     }
+    // }
 }
