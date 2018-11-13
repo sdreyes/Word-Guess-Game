@@ -25,14 +25,18 @@ for (var i=0; i < wordChoice.length; i++) {
     wordLetters.push("_");
 }
 console.log(wordLetters);
+wordText.textContent = wordLetters.join(" ");
+
 
 // When the user presses a key this function runs
 document.onkeyup = function(event) {
-    var userGuess = event.key;
+    var letter = event.key;
+    var userGuess = letter.toLowerCase();
 
     if(wordChoice.indexOf(userGuess) > -1) {
         wordLetters[wordChoice.indexOf(userGuess)] = userGuess;
         console.log(wordLetters);
+        wordText.textContent = wordLetters.join(" ");
     } else {
 
         if(wrongGuesses.indexOf(userGuess) > -1) {
