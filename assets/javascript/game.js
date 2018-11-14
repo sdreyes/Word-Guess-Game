@@ -1,5 +1,5 @@
 // Array of possibilities for the word the user has to guess
-const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth", "jigglypuff", "chansey", "ghastly", "gengar", "mew"];
+const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth", "jigglypuff", "chansey", "ghastly", "gengar", "mew", "jynx", "caterpie", "kangaskhan"];
 
 // Holds the score
 var wins = 0;
@@ -28,37 +28,35 @@ for (var i = 0; i < wordChoice.length; i++) {
 document.onkeyup = function(event) {
     var letter = event.key;
     var userGuess = letter.toLowerCase();
+    var userGuessKeyCode = event.keyCode;
 
-    console.log("Guesses: " + guesses);
-    console.log("Losses: " + losses);
+    // If the user guesses a letter
+    if (userGuessKeyCode > 64 && userGuessKeyCode < 91) {
 
-    for (var j = 0; j < wordChoice.length; j++) {
-        if (wordChoice[j] == userGuess) {
-            wordLetters[j] = userGuess
+        for (var j = 0; j < wordChoice.length; j++) {
+            if (wordChoice[j] == userGuess) {
+                wordLetters[j] = userGuess
+            }
         }
-    }
 
-    if (wordChoice.indexOf(userGuess) == -1) {
+        if (wordChoice.indexOf(userGuess) == -1) {
 
-        if (wrongGuesses.indexOf(userGuess) > -1) {
-            //if the letter has been guessed before, do nothing!
-            console.log("Guesses if the letter has been guessed before: " + guesses);
-            console.log("Losses if the letter has been guessed before: " + losses);
-        }
-        else {
-            wrongGuesses.push(userGuess);
-            guesses = guesses + 1;
-            console.log("Guesses if added to the wrong guess array: " + guesses);
-            console.log("Losses if added to the wrong guess array: " + losses);
+            if (wrongGuesses.indexOf(userGuess) > -1) {
+                //if the letter has been guessed before, do nothing!
 
-            if (guesses === 12) {
-                losses = losses + 1;
-                console.log("Guesses if equal to 12: " + guesses);
-                console.log("Losses if 12 guesses: " + losses);
+            }
+            else {
+                wrongGuesses.push(userGuess);
+                guesses = guesses + 1;
+
+
+                if (guesses === 12) {
+                    losses = losses + 1;
+
+                }
             }
         }
     }
-
     wordText.textContent = wordLetters.join(" ");
     wrongGuessesText.textContent = wrongGuesses.join(" ");
     guessesLeftText.textContent = 12 - guesses;
