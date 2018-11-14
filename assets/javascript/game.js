@@ -15,8 +15,6 @@ var lossesText = document.getElementById("losses-text");
 
 var wordChoice = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 
-console.log(wordChoice);
-
 var wordLetters = [];
 var wrongGuesses =[];
 
@@ -24,51 +22,47 @@ var wrongGuesses =[];
 for (var i = 0; i < wordChoice.length; i++) {
     wordLetters.push("_");
 }
-console.log(wordLetters);
-wordText.textContent = wordLetters.join(" ");
-
 
 // When the user presses a key this function runs
+
 document.onkeyup = function(event) {
     var letter = event.key;
     var userGuess = letter.toLowerCase();
 
+    console.log("Guesses: " + guesses);
+    console.log("Losses: " + losses);
 
     for (var j = 0; j < wordChoice.length; j++) {
         if (wordChoice[j] == userGuess) {
             wordLetters[j] = userGuess
-            wordText.textContent = wordLetters.join(" ");
         }
     }
 
     if (wordChoice.indexOf(userGuess) == -1) {
 
         if (wrongGuesses.indexOf(userGuess) > -1) {
-            //do nothing!
+            //if the letter has been guessed before, do nothing!
+            console.log("Guesses if the letter has been guessed before: " + guesses);
+            console.log("Losses if the letter has been guessed before: " + losses);
         }
         else {
             wrongGuesses.push(userGuess);
             guesses = guesses + 1;
-            guessesLeftText.textContent = 12 - guesses;
-            wrongGuessesText.textContent = wrongGuesses.join(" ");
+            console.log("Guesses if added to the wrong guess array: " + guesses);
+            console.log("Losses if added to the wrong guess array: " + losses);
+
+            if (guesses === 12) {
+                losses = losses + 1;
+                console.log("Guesses if equal to 12: " + guesses);
+                console.log("Losses if 12 guesses: " + losses);
+            }
         }
     }
 
-
-    // if(wordChoice.indexOf(userGuess) > -1) {
-    //     wordLetters[wordChoice.indexOf(userGuess)] = userGuess;
-    //     console.log(wordLetters);
-    //     wordText.textContent = wordLetters.join(" ");
-    // } else {
-
-    //     if(wrongGuesses.indexOf(userGuess) > -1) {
-    //         //if the letter was already guessed before, do nothing
-    //     }
-    //     else {
-    //     wrongGuesses.push(userGuess);
-    //     guesses = guesses + 1;
-    //     console.log(wrongGuesses);
-    //     guessesLeftText.textContent = 12 - guesses;
-    //     }
-    // }
+    wordText.textContent = wordLetters.join(" ");
+    wrongGuessesText.textContent = wrongGuesses.join(" ");
+    guessesLeftText.textContent = 12 - guesses;
+    winsText.textContent = wins;
+    lossesText.textContent = losses;
+    
 }
