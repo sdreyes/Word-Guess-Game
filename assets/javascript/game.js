@@ -4,7 +4,7 @@ const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth",
 // Holds the score
 var wins = 0;
 var losses = 0;
-var guesses = 0;
+var guesses
 
 // Variables that hold text to display
 var wordText = document.getElementById("word-text");
@@ -13,15 +13,17 @@ var guessesLeftText = document.getElementById("guessesleft-text");
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 
-var wordLetters = [];
-var wrongGuesses = [];
-var alreadyPlayed = [];
+var wordLetters
+var wrongGuesses
 var wordChoice
 
 var resetGame = function() {
     var random = Math.floor(Math.random() * wordChoices.length);
     wordChoice = wordChoices[random];
     console.log(wordChoice);
+    wordLetters = [];
+    guesses = 0;
+    wrongGuesses = [];
 
     //creates an array of under scores to show how many letters are in the word the user needs to guess
     for (var i = 0; i < wordChoice.length; i++) {
@@ -68,11 +70,6 @@ document.onkeyup = function (event) {
                             guesses = guesses + 1;
                             console.log(wordLetters);
                         }
-
-                        if (wordLetters.includes("_") === false && guesses <= 12) {
-                            wins++;
-                            resetGame();
-                        }
                     }
                 }
 
@@ -85,11 +82,15 @@ document.onkeyup = function (event) {
                     else {
                         wrongGuesses.push(userGuess);
                         guesses = guesses + 1;
-                        if (guesses === 12 && wordLetters.indexOf("_") > -1) {
-                            losses = losses + 1;
-
-                        }
                     }
+                }
+                if (wordLetters.includes("_") === false && guesses <= 12) {
+                    wins++;
+                    resetGame();
+                }
+                else if (wordLetters.includes("_") && guesses === 12) {
+                    losses++;
+                    resetGame();
                 }
                 displayStats();
             }
