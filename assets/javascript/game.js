@@ -13,54 +13,73 @@ var guessesLeftText = document.getElementById("guessesleft-text");
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 
-var wordChoice = wordChoices[Math.floor(Math.random() * wordChoices.length)];
-
 var wordLetters = [];
-var wrongGuesses =[];
+var wrongGuesses = [];
+var alreadyPlayed = [];
+var wordChoice
 
-//creates an array of under scores to show how many letters are in the word the user needs to guess
-for (var i = 0; i < wordChoice.length; i++) {
-    wordLetters.push("_");
+var resetGame = function() {
+    var random = Math.floor(Math.random() * wordChoices.length);
+    wordChoice = wordChoices[random];
+    console.log(wordChoice);
+
+    //creates an array of under scores to show how many letters are in the word the user needs to guess
+    for (var i = 0; i < wordChoice.length; i++) {
+        wordLetters.push("_");
+    }
 }
 
-// When the user presses a key this function runs
-
-document.onkeyup = function(event) {
-    var letter = event.key;
-    var userGuess = letter.toLowerCase();
-    var userGuessKeyCode = event.keyCode;
-
-    // If the user guesses a letter
-    if (userGuessKeyCode > 64 && userGuessKeyCode < 91) {
-
-        for (var j = 0; j < wordChoice.length; j++) {
-            if (wordChoice[j] == userGuess) {
-                wordLetters[j] = userGuess
-            }
-        }
-
-        if (wordChoice.indexOf(userGuess) == -1) {
-
-            if (wrongGuesses.indexOf(userGuess) > -1) {
-                //if the letter has been guessed before, do nothing!
-
-            }
-            else {
-                wrongGuesses.push(userGuess);
-                guesses = guesses + 1;
-
-
-                if (guesses === 12) {
-                    losses = losses + 1;
-
-                }
-            }
-        }
-    }
+var displayStats = function() {
     wordText.textContent = wordLetters.join(" ");
     wrongGuessesText.textContent = wrongGuesses.join(" ");
     guessesLeftText.textContent = 12 - guesses;
     winsText.textContent = wins;
     lossesText.textContent = losses;
-    
+}
+
+document.onkeyup = function (event) {
+    var startKeyCode = event.keyCode
+
+    if (startKeyCode === 32) {
+
+        resetGame();
+        displayStats();
+        
+        document.onkeyup = function (event) {
+            var letter = event.key;
+            var userGuess = letter.toLowerCase();
+            var userGuessKeyCode = event.keyCode;
+            console.log(userGuess);
+            console.log(wordChoice);
+
+            // If the user guesses a letter
+            if (userGuessKeyCode > 64 && userGuessKeyCode < 91) {
+
+                for (var j = 0; j < wordChoice.length; j++) {
+                    // Does not deduct from "guesses left" if the letter was previously guessed
+                    if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
+                        wordLetters[j] = userGuess
+                        guesses = guesses + 1;
+                    }
+                }
+
+                if (wordChoice.indexOf(userGuess) == -1) {
+
+                    if (wrongGuesses.indexOf(userGuess) > -1) {
+                        // If the letter has been guessed before, do nothing!
+
+                    }
+                    else {
+                        wrongGuesses.push(userGuess);
+                        guesses = guesses + 1;
+                        if (guesses === 12 && wordLetters.indexOf("_") > -1) {
+                            losses = losses + 1;
+
+                        }
+                    }
+                }
+                displayStats();
+            }
+        }
+    }
 }
