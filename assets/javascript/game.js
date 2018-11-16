@@ -3,11 +3,19 @@
 // const imageLocations = ["assets/images/pikachu.png", "assets/images/charmander.png", "assets/images/squirtle.png", "assets/images/bulbasaur.png"]
 
 const wordChoices = {
-    "pikachu": "assets/images/pikachu.png",
-    "charmander": "assets/images/charmander.png",
-    "squirtle": "assets/images/squirtle.png",
     "bulbasaur": "assets/images/bulbasaur.png",
-    "caterpie": "assets/images/caterpie.png"
+    "caterpie": "assets/images/caterpie.png",
+    "chansey": "assets/images/chansey.png",
+    "charmander": "assets/images/charmander.png",
+    "gastly": "assets/images/gastly.png",
+    "jigglypuff": "assets/images/jigglypuff.png",
+    "jynx": "assets/images/jynx.png",
+    "kangaskhan": "assets/images/kangaskhan.png",
+    "lickitung": "assets/images/lickitung.png",
+    "mew": "assets/images/mew.png",
+    "pikachu": "assets/images/pikachu.png",
+    "squirtle": "assets/images/squirtle.png",
+    "staryu": "assets/images/staryu.png"
 };
 
 console.log(wordChoices);
