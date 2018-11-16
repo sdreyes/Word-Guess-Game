@@ -35,10 +35,8 @@ var image = document.createElement("img");
 
 var resetGame = function() {
     var random = Math.floor(Math.random() * Object.keys(wordChoices).length);
-    console.log(random);
     wordChoice = Object.keys(wordChoices)[random];
     wordChoiceImage = Object.values(wordChoices)[random];
-    console.log(wordChoice);
     wordLetters = [];
     guesses = 0;
     wrongGuesses = [];
@@ -70,8 +68,9 @@ document.onkeyup = function (event) {
             var letter = event.key;
             var userGuess = letter.toLowerCase();
             var userGuessKeyCode = event.keyCode;
-            console.log(userGuess);
+
             console.log(wordChoice);
+            console.log(guesses);
 
             // If the user guesses a letter
             if (userGuessKeyCode > 64 && userGuessKeyCode < 91) {
@@ -102,20 +101,22 @@ document.onkeyup = function (event) {
                         guesses = guesses + 1;
                     }
                 }
+
                 if (wordLetters.includes("_") === false && guesses <= 12) {
                     wins++;
                     image.src = wordChoiceImage;
                     instructionsText.appendChild(image);
                     gameOutcomeText.textContent = "You win!";
                     resetGame();
-                    console.log(image);
                 }
+
                 else if (wordLetters.includes("_") && guesses === 12) {
                     losses++;
-                    instructionsText.appendChild();
+                    instructionsText.textContent = "";
                     gameOutcomeText.textContent = "You lose! The answer was " + wordChoice + ".";
                     resetGame();
                 }
+
                 displayStats();
             }
         }
