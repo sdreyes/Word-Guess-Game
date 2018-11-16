@@ -106,13 +106,16 @@ document.onkeyup = function (event) {
                     wins++;
                     image.src = wordChoiceImage;
                     instructionsText.appendChild(image);
+                    gameOutcomeText.className = "text-success";
                     gameOutcomeText.textContent = "You win!";
                     resetGame();
                 }
 
                 else if (wordLetters.includes("_") && guesses === 12) {
                     losses++;
-                    instructionsText.textContent = "";
+                    image.src = "assets/images/sad.gif";
+                    instructionsText.appendChild(image);
+                    gameOutcomeText.className = "text-danger";
                     gameOutcomeText.textContent = "You lose! The answer was " + wordChoice + ".";
                     resetGame();
                 }
