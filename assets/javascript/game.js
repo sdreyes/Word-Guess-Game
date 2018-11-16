@@ -44,6 +44,7 @@ var image = document.createElement("img");
 var resetGame = function() {
     var random = Math.floor(Math.random() * Object.keys(wordChoices).length);
     wordChoice = Object.keys(wordChoices)[random];
+    console.log(wordChoice);
     wordChoiceImage = Object.values(wordChoices)[random];
     wordLetters = [];
     guesses = 0;
@@ -76,9 +77,6 @@ document.onkeyup = function (event) {
             var letter = event.key;
             var userGuess = letter.toLowerCase();
             var userGuessKeyCode = event.keyCode;
-
-            console.log(wordChoice);
-            console.log(guesses);
 
             // If the user guesses a letter
             if (userGuessKeyCode > 64 && userGuessKeyCode < 91) {
