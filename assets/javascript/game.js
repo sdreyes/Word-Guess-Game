@@ -58,12 +58,18 @@ document.onkeyup = function (event) {
                 for (var j = 0; j < wordChoice.length; j++) {
                     // Does not deduct from "guesses left" if the letter was previously guessed
                     if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
-                        // wordLetters.indexOf[j] > -1
-                        wordLetters[j] = userGuess
-                        guesses = guesses + 1;
-                        console.log(wordLetters);
+                        
+                        if (wordLetters.includes(userGuess)) {
+                            wordLetters[j] = userGuess
+                        }
 
-                        if (wordLetters.indexOf["_"] === -1 && guesses <= 12) {
+                        else {
+                            wordLetters[j] = userGuess
+                            guesses = guesses + 1;
+                            console.log(wordLetters);
+                        }
+
+                        if (wordLetters.includes("_") === false && guesses <= 12) {
                             wins++;
                             resetGame();
                         }
