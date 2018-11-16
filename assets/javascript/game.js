@@ -57,7 +57,7 @@ var resetGame = function() {
 
 var displayStats = function() {
     wordText.textContent = wordLetters.join(" ");
-    wrongGuessesText.textContent = wrongGuesses.join(" ");
+    wrongGuessesText.textContent = wrongGuesses.sort().join(" ");
     guessesLeftText.textContent = 12 - guesses;
     winsText.textContent = wins;
     lossesText.textContent = losses;
@@ -113,17 +113,19 @@ document.onkeyup = function (event) {
                 if (wordLetters.includes("_") === false && guesses <= 12) {
                     wins++;
                     image.src = wordChoiceImage;
+                    image.className = "text-center";
                     instructionsText.appendChild(image);
-                    gameOutcomeText.className = "text-success";
-                    gameOutcomeText.textContent = "You win!";
+                    gameOutcomeText.className = "text-success text-center";
+                    gameOutcomeText.textContent = "You win! The answer was " + wordChoice + "!";
                     resetGame();
                 }
 
                 else if (wordLetters.includes("_") && guesses === 12) {
                     losses++;
                     image.src = "assets/images/sad.gif";
+                    image.className = "text-center";
                     instructionsText.appendChild(image);
-                    gameOutcomeText.className = "text-danger";
+                    gameOutcomeText.className = "text-danger text-center";
                     gameOutcomeText.textContent = "You lose! The answer was " + wordChoice + ".";
                     resetGame();
                 }
