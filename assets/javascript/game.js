@@ -1,6 +1,5 @@
-// Array of possibilities for the word the user has to guess
-// const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth", "jigglypuff", "chansey", "ghastly", "gengar", "mew", "jynx", "caterpie", "kangaskhan"];
-// const imageLocations = ["assets/images/pikachu.png", "assets/images/charmander.png", "assets/images/squirtle.png", "assets/images/bulbasaur.png"]
+
+// Dictionary of possibilities for the words the user has to guess
 
 const wordChoices = {
     "bulbasaur": "assets/images/bulbasaur.png",
