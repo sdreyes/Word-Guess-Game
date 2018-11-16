@@ -1,5 +1,17 @@
 // Array of possibilities for the word the user has to guess
-const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth", "jigglypuff", "chansey", "ghastly", "gengar", "mew", "jynx", "caterpie", "kangaskhan"];
+// const wordChoices = ["pikachu", "charmander", "squirtle", "bulbasaur", "meowth", "jigglypuff", "chansey", "ghastly", "gengar", "mew", "jynx", "caterpie", "kangaskhan"];
+// const imageLocations = ["assets/images/pikachu.png", "assets/images/charmander.png", "assets/images/squirtle.png", "assets/images/bulbasaur.png"]
+
+const wordChoices = {
+    "pikachu": "assets/images/pikachu.png",
+    "charmander": "assets/images/charmander.png",
+    "squirtle": "assets/images/squirtle.png",
+    "bulbasaur": "assets/images/bulbasaur.png",
+    "caterpie": "assets/images/caterpie.png"
+};
+
+console.log(wordChoices);
+console.log(Object.keys(wordChoices).length);
 
 // Holds the score
 var wins = 0;
@@ -12,14 +24,20 @@ var wrongGuessesText = document.getElementById("wrongguesses-text");
 var guessesLeftText = document.getElementById("guessesleft-text");
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
+var instructionsText = document.getElementById("instructions-text");
+var gameOutcomeText = document.getElementById("game-outcome-text");
 
 var wordLetters
 var wrongGuesses
 var wordChoice
+var wordChoiceImage
+var image = document.createElement("img");
 
 var resetGame = function() {
-    var random = Math.floor(Math.random() * wordChoices.length);
-    wordChoice = wordChoices[random];
+    var random = Math.floor(Math.random() * Object.keys(wordChoices).length);
+    console.log(random);
+    wordChoice = Object.keys(wordChoices)[random];
+    wordChoiceImage = Object.values(wordChoices)[random];
     console.log(wordChoice);
     wordLetters = [];
     guesses = 0;
@@ -46,6 +64,7 @@ document.onkeyup = function (event) {
 
         resetGame();
         displayStats();
+        instructionsText.textContent = "";
         
         document.onkeyup = function (event) {
             var letter = event.key;
@@ -77,7 +96,6 @@ document.onkeyup = function (event) {
 
                     if (wrongGuesses.indexOf(userGuess) > -1) {
                         // If the letter has been guessed before, do nothing!
-
                     }
                     else {
                         wrongGuesses.push(userGuess);
@@ -86,10 +104,16 @@ document.onkeyup = function (event) {
                 }
                 if (wordLetters.includes("_") === false && guesses <= 12) {
                     wins++;
+                    image.src = wordChoiceImage;
+                    instructionsText.appendChild(image);
+                    gameOutcomeText.textContent = "You win!";
                     resetGame();
+                    console.log(image);
                 }
                 else if (wordLetters.includes("_") && guesses === 12) {
                     losses++;
+                    instructionsText.appendChild();
+                    gameOutcomeText.textContent = "You lose! The answer was " + wordChoice + ".";
                     resetGame();
                 }
                 displayStats();
