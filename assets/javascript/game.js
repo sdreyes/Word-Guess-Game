@@ -34,11 +34,16 @@ var lossesText = document.getElementById("losses-text");
 var instructionsText = document.getElementById("instructions-text");
 var gameOutcomeText = document.getElementById("game-outcome-text");
 
+
 var wordLetters
 var wrongGuesses
 var wordChoice
 var wordChoiceImage
 var image = document.createElement("img");
+const spaceBar = 32;
+const a = 65;
+const z = 90;
+const maxGuesses = 12;
 
 var resetGame = function() {
     var random = Math.floor(Math.random() * Object.keys(wordChoices).length);
@@ -58,7 +63,7 @@ var resetGame = function() {
 var displayStats = function() {
     wordText.textContent = wordLetters.join(" ");
     wrongGuessesText.textContent = wrongGuesses.sort().join(" ");
-    guessesLeftText.textContent = 12 - guesses;
+    guessesLeftText.textContent = maxGuesses - guesses;
     winsText.textContent = wins;
     lossesText.textContent = losses;
 }
@@ -66,7 +71,7 @@ var displayStats = function() {
 document.onkeyup = function (event) {
     var startKeyCode = event.keyCode
 
-    if (startKeyCode === 32) {
+    if (startKeyCode === spaceBar) {
 
         resetGame();
         displayStats();
@@ -78,7 +83,7 @@ document.onkeyup = function (event) {
             var userGuessKeyCode = event.keyCode;
 
             // If the user guesses a letter
-            if (userGuessKeyCode > 64 && userGuessKeyCode < 91) {
+            if (userGuessKeyCode >= a && userGuessKeyCode <= z) {
 
                 for (var j = 0; j < wordChoice.length; j++) {
                     // Does not deduct from "guesses left" if the letter was previously guessed
@@ -107,7 +112,7 @@ document.onkeyup = function (event) {
                     }
                 }
 
-                if (wordLetters.includes("_") === false && guesses <= 12) {
+                if (wordLetters.includes("_") === false && guesses <= maxGuesses) {
                     wins++;
                     image.src = wordChoiceImage;
                     image.className = "text-center";
@@ -117,7 +122,7 @@ document.onkeyup = function (event) {
                     resetGame();
                 }
 
-                else if (wordLetters.includes("_") && guesses === 12) {
+                else if (wordLetters.includes("_") && guesses === maxGuesses) {
                     losses++;
                     image.src = "assets/images/sad.gif";
                     image.className = "text-center";
