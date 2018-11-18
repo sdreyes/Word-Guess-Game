@@ -6,15 +6,20 @@ const wordChoices = {
     "caterpie": "assets/images/caterpie.png",
     "chansey": "assets/images/chansey.png",
     "charmander": "assets/images/charmander.png",
+    "dratini": "assets/images/dratini.png",
     "gastly": "assets/images/gastly.png",
+    "growlithe": "assets/images/growlithe.png",
     "jigglypuff": "assets/images/jigglypuff.png",
     "jynx": "assets/images/jynx.png",
     "kangaskhan": "assets/images/kangaskhan.png",
     "lickitung": "assets/images/lickitung.png",
     "mew": "assets/images/mew.png",
     "pikachu": "assets/images/pikachu.png",
+    "pinsir": "assets/images/pinsir",
+    "snorlax": "assets/images/snorlax.png",
     "squirtle": "assets/images/squirtle.png",
-    "staryu": "assets/images/staryu.png"
+    "staryu": "assets/images/staryu.png",
+    "tangela": "assets/images/tangela.png"
 };
 
 console.log(wordChoices);
@@ -87,13 +92,16 @@ document.onkeyup = function (event) {
             if (userGuessKeyCode >= a && userGuessKeyCode <= z) {
 
                 for (var j = 0; j < wordChoice.length; j++) {
+                    
                     // Does not deduct from "guesses left" if the letter was previously guessed
                     if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
                         
+                        //If the letter is already in the word, place it in without deducting from the guess count
                         if (wordLetters.includes(userGuess)) {
                             wordLetters[j] = userGuess
                         }
 
+                        //If the letter is not in the word yet, place it in and deduct from the guess count
                         else {
                             wordLetters[j] = userGuess
                             guesses = guesses + 1;
@@ -101,15 +109,16 @@ document.onkeyup = function (event) {
                         }
                     }
                 }
+                //If the word does not include the letter the user guessed
+                if (!wordChoice.includes(userGuess)) {
 
-                if (wordChoice.indexOf(userGuess) == -1) {
                     // If the letter has been guessed before, do nothing. Otherwise push it to the wrong guess array and add one to the number of guesses.
                     if (!wrongGuesses.includes(userGuess)) {
                         wrongGuesses.push(userGuess);
                         guesses = guesses + 1;
                     }
                 }
-
+                //if the word no longer has blank spaces and the guesses haven't exceeded the max guesses, you win!
                 if (!wordLetters.includes("_") && guesses <= maxGuesses) {
                     wins++;
                     image.src = wordChoiceImage;
@@ -120,6 +129,7 @@ document.onkeyup = function (event) {
                     resetGame();
                 }
 
+                //If the word still has blank spaces and the max guesses has been reached, you lose!
                 else if (wordLetters.includes("_") && guesses === maxGuesses) {
                     losses++;
                     image.src = "assets/images/sad.gif";

@@ -1,0 +1,12 @@
+.jumbotron {
+    background-image: url("../images/pokemonbackground.png");
+    background-repeat: repeat;
+}
+
+#logo {
+    font-family: 'Bungee', cursive;
+}
+
+#instructions-text {
+    font-family: 'Bungee', cursive;   
+}
