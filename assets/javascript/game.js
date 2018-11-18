@@ -22,9 +22,6 @@ const wordChoices = {
     "tangela": "assets/images/tangela.png"
 };
 
-console.log(wordChoices);
-console.log(Object.keys(wordChoices).length);
-
 // Holds the score
 var wins = 0;
 var losses = 0;
@@ -93,19 +90,13 @@ document.onkeyup = function (event) {
 
                 for (var j = 0; j < wordChoice.length; j++) {
                     
-                    // Does not deduct from "guesses left" if the letter was previously guessed
+                    // Does not add to the guess count if the letter was previously guessed
                     if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
-                        
-                        //If the letter is already in the word, place it in without deducting from the guess count
-                        if (wordLetters.includes(userGuess)) {
-                            wordLetters[j] = userGuess
-                        }
+                        wordLetters[j] = userGuess
 
-                        //If the letter is not in the word yet, place it in and deduct from the guess count
-                        else {
-                            wordLetters[j] = userGuess
-                            guesses = guesses + 1;
-                            console.log(wordLetters);
+                        //If the letter is not in the word yet, place it in and add to the guess count
+                        if (!wordLetters.includes(userGuess)) {
+                            guesses++;
                         }
                     }
                 }
@@ -115,7 +106,7 @@ document.onkeyup = function (event) {
                     // If the letter has been guessed before, do nothing. Otherwise push it to the wrong guess array and add one to the number of guesses.
                     if (!wrongGuesses.includes(userGuess)) {
                         wrongGuesses.push(userGuess);
-                        guesses = guesses + 1;
+                        guesses++;
                     }
                 }
                 //if the word no longer has blank spaces and the guesses haven't exceeded the max guesses, you win!
@@ -133,6 +124,8 @@ document.onkeyup = function (event) {
                 else if (wordLetters.includes("_") && guesses === maxGuesses) {
                     losses++;
                     image.src = "assets/images/sad.gif";
+                    image.style.width = "100px";
+                    image.style.height = "100px";
                     image.className = "text-center";
                     imageLocText.appendChild(image);
                     gameOutcomeText.className = "text-danger text-center";
