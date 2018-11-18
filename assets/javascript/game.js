@@ -33,6 +33,7 @@ var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 var instructionsText = document.getElementById("instructions-text");
 var gameOutcomeText = document.getElementById("game-outcome-text");
+var imageLocText = document.getElementById("image-loc");
 
 
 var wordLetters
@@ -102,21 +103,18 @@ document.onkeyup = function (event) {
                 }
 
                 if (wordChoice.indexOf(userGuess) == -1) {
-
-                    if (wrongGuesses.indexOf(userGuess) > -1) {
-                        // If the letter has been guessed before, do nothing!
-                    }
-                    else {
+                    // If the letter has been guessed before, do nothing. Otherwise push it to the wrong guess array and add one to the number of guesses.
+                    if (!wrongGuesses.includes(userGuess)) {
                         wrongGuesses.push(userGuess);
                         guesses = guesses + 1;
                     }
                 }
 
-                if (wordLetters.includes("_") === false && guesses <= maxGuesses) {
+                if (!wordLetters.includes("_") && guesses <= maxGuesses) {
                     wins++;
                     image.src = wordChoiceImage;
                     image.className = "text-center";
-                    instructionsText.appendChild(image);
+                    imageLocText.appendChild(image);
                     gameOutcomeText.className = "text-success text-center";
                     gameOutcomeText.textContent = "You win! The answer was " + wordChoice + "!";
                     resetGame();
@@ -126,7 +124,7 @@ document.onkeyup = function (event) {
                     losses++;
                     image.src = "assets/images/sad.gif";
                     image.className = "text-center";
-                    instructionsText.appendChild(image);
+                    imageLocText.appendChild(image);
                     gameOutcomeText.className = "text-danger text-center";
                     gameOutcomeText.textContent = "You lose! The answer was " + wordChoice + ".";
                     resetGame();
