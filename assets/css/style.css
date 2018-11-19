@@ -2,11 +2,6 @@ body {
     font-family: 'Bungee', cursive;
 }
 
-img {
-    height: 200px;
-    width: auto;
-}
-
 .jumbotron {
     background-image: url("../images/pokemonbackground.png");
     background-repeat: repeat;
