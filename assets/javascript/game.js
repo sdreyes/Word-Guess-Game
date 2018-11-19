@@ -15,7 +15,7 @@ const wordChoices = {
     "lickitung": "assets/images/lickitung.png",
     "mew": "assets/images/mew.png",
     "pikachu": "assets/images/pikachu.png",
-    "pinsir": "assets/images/pinsir",
+    "pinsir": "assets/images/pinsir.png",
     "snorlax": "assets/images/snorlax.png",
     "squirtle": "assets/images/squirtle.png",
     "staryu": "assets/images/staryu.png",
@@ -90,14 +90,14 @@ document.onkeyup = function (event) {
 
                 for (var j = 0; j < wordChoice.length; j++) {
                     
+                    //If the letter is not in the word yet, place it in and add to the guess count
+                    if (wordChoice[j] === userGuess && wordLetters[j] === "_" && !wordLetters.includes(userGuess)) {
+                        wordLetters[j] = userGuess;
+                        guesses++;
+                    }
                     // Does not add to the guess count if the letter was previously guessed
-                    if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
-                        wordLetters[j] = userGuess
-
-                        //If the letter is not in the word yet, place it in and add to the guess count
-                        if (!wordLetters.includes(userGuess)) {
-                            guesses++;
-                        }
+                    else if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
+                        wordLetters[j] = userGuess;
                     }
                 }
                 //If the word does not include the letter the user guessed
@@ -124,8 +124,6 @@ document.onkeyup = function (event) {
                 else if (wordLetters.includes("_") && guesses === maxGuesses) {
                     losses++;
                     image.src = "assets/images/sad.gif";
-                    image.style.width = "100px";
-                    image.style.height = "100px";
                     image.className = "text-center";
                     imageLocText.appendChild(image);
                     gameOutcomeText.className = "text-danger text-center";

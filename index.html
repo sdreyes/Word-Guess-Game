@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="jumbotron justify-content-center text-center">
-        <img src="assets\images\pokemonlogo.png">
+        <img id="pokemon-logo" src="assets\images\pokemonlogo.png">
         <br />
-        <h3 class="text-center" id="logo">Guessing Game</h3>
+        <h3 class="text-center" id="logo-text">Guessing Game</h3>
         <div class="text-center" id="instructions-text">
             <br />
             <h6>Press spacebar to begin.</h3>
@@ -23,20 +23,33 @@
             <div class="col border rounded p-3 mr-3">
                 <ul class="list-group">
 
-                    <li class="list-group-item list-group-item-info"><h3>Pokemon to guess: <span id="word-text"></span></h3></li>
-
-                    <li class="list-group-item">Wrong guesses: <span id="wrongguesses-text"></span></li>
-
-                    <li class="list-group-item">Guesses left: <span id="guessesleft-text">12</span></li>
-
-                    <li class="list-group-item">Wins: <span id="wins-text"></span></li>
-
-                    <li class="list-group-item">Losses: <span id="losses-text"></span></li>
+                    <li class="list-group-item list-group-item-info">
+                        <h3 class="text-center"> 
+                        <br />
+                        <span id="word-text"></span></h3>
+                    </li>
+                    <li class="list-group-item">
+                        Wrong guesses: 
+                        <span id="wrongguesses-text"></span>
+                    </li>
+                    <li class="list-group-item">
+                        Guesses left: 
+                        <span id="guessesleft-text"></span>
+                    </li>
+                    <li class="list-group-item">
+                        Wins: 
+                        <span id="wins-text"></span>
+                    </li>
+                    <li class="list-group-item">
+                        Losses: 
+                        <span id="losses-text"></span>
+                    </li>
                 </ul>
             </div>
-            <div class="col border rounded p-3">
+            <div class="col border rounded p-3" id="outcome-div">
                 <div class="text-center" id="image-loc"></div>
-                <h3 id="game-outcome-text"></h3>
+                <br />
+                <h6 id="game-outcome-text"></h6>
             </div>
         </div>
     </div>

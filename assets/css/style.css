@@ -1,12 +1,32 @@
+body {
+    font-family: 'Bungee', cursive;
+}
+
+img {
+    height: 200px;
+    width: auto;
+}
+
 .jumbotron {
     background-image: url("../images/pokemonbackground.png");
     background-repeat: repeat;
 }
 
-#logo {
+#pokemon-logo {
+    height: auto;
+    width: auto;
+}
+
+#logo-text {
     font-family: 'Bungee', cursive;
 }
 
 #instructions-text {
     font-family: 'Bungee', cursive;   
+}
+
+#outcome-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
