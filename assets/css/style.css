@@ -12,19 +12,6 @@ img {
     background-repeat: repeat;
 }
 
-#pokemon-logo {
-    height: auto;
-    width: auto;
-}
-
-#logo-text {
-    font-family: 'Bungee', cursive;
-}
-
-#instructions-text {
-    font-family: 'Bungee', cursive;   
-}
-
 #outcome-div {
     display: flex;
     flex-direction: column;

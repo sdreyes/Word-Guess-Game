@@ -1,5 +1,6 @@
 
-// Dictionary of possibilities for the words the user has to guess
+
+// Dictionary of Pokemon possibilities
 
 const wordChoices = {
     "bulbasaur": "assets/images/bulbasaur.png",
@@ -22,10 +23,11 @@ const wordChoices = {
     "tangela": "assets/images/tangela.png"
 };
 
-// Holds the score
+// Score related variables
 var wins = 0;
 var losses = 0;
 var guesses
+const maxGuesses = 12;
 
 // Variables that hold text to display
 var wordText = document.getElementById("word-text");
@@ -37,17 +39,25 @@ var instructionsText = document.getElementById("instructions-text");
 var gameOutcomeText = document.getElementById("game-outcome-text");
 var imageLocText = document.getElementById("image-loc");
 
-
-var wordLetters
-var wrongGuesses
-var wordChoice
-var wordChoiceImage
-var image = document.createElement("img");
+// Key codes
 const spaceBar = 32;
 const a = 65;
 const z = 90;
-const maxGuesses = 12;
 
+// Array for the letters that are correct
+var wordLetters
+
+// Array for letters that are incorrect
+var wrongGuesses
+
+// Variables that hold info pulled from the dictionary
+var wordChoice
+var wordChoiceImage
+
+// Creates an image tag to later hold the Pokemon's picture
+var image = document.createElement("img");
+
+// Function that resets the random Pokemon, the guess counter, and the arrays that hold the letters the user has typed
 var resetGame = function() {
     var random = Math.floor(Math.random() * Object.keys(wordChoices).length);
     wordChoice = Object.keys(wordChoices)[random];
@@ -57,12 +67,13 @@ var resetGame = function() {
     guesses = 0;
     wrongGuesses = [];
 
-    //creates an array of under scores to show how many letters are in the word the user needs to guess
+    // Creates an array of underscores to show how many letters are in the word
     for (var i = 0; i < wordChoice.length; i++) {
         wordLetters.push("_");
     }
 }
 
+// Function that displays updated game stats
 var displayStats = function() {
     wordText.textContent = wordLetters.join(" ");
     wrongGuessesText.textContent = wrongGuesses.sort().join(" ");
@@ -73,13 +84,14 @@ var displayStats = function() {
 
 document.onkeyup = function (event) {
     var startKeyCode = event.keyCode
-
+    // Start the game if the user pressed the spacebar
     if (startKeyCode === spaceBar) {
 
         resetGame();
         displayStats();
         instructionsText.textContent = "";
         
+        // Evaluate the keys the user types
         document.onkeyup = function (event) {
             var letter = event.key;
             var userGuess = letter.toLowerCase();
