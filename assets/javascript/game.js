@@ -124,8 +124,7 @@ document.onkeyup = function (event) {
                 //if the word no longer has blank spaces and the guesses haven't exceeded the max guesses, you win!
                 if (!wordLetters.includes("_") && guesses <= maxGuesses) {
                     wins++;
-                    image.src = wordChoiceImage;
-                    image.className = "text-center";
+                    $(image).attr("src", wordChoiceImage).addClass("text-center");
                     $("#image-loc").append(image);
                     $("#game-outcome-text").removeClass();
                     $("#game-outcome-text").addClass("text-success text-center");
@@ -136,8 +135,7 @@ document.onkeyup = function (event) {
                 //If the word still has blank spaces and the max guesses has been reached, you lose!
                 else if (wordLetters.includes("_") && guesses === maxGuesses) {
                     losses++;
-                    image.src = "assets/images/sad.gif";
-                    image.className = "text-center";
+                    $(image).attr("src", "assets/images/sad.gif").addClass("text-center");
                     $("#image-loc").append(image);
                     $("#game-outcome-text").removeClass();
                     $("#game-outcome-text").addClass("text-danger text-center");
