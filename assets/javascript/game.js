@@ -25,6 +25,7 @@ var wins = 0;
 var losses = 0;
 var guesses
 const maxGuesses = 12;
+var gameStarted = false;
 
 // Key codes
 const spaceBar = 32;
@@ -70,17 +71,18 @@ var displayStats = function() {
     $("#losses-text").text(losses);
 };
 
-document.onkeyup = function (event) {
+$(document).keyup(function() {
     var startKeyCode = event.keyCode
     // Start the game if the user pressed the spacebar
-    if (startKeyCode === spaceBar) {
+    if (startKeyCode === spaceBar && gameStarted === false) {
 
         resetGame();
         displayStats();
         $("#instructions-text").text("");
+        gameStarted = true;
         
         // Evaluate the keys the user types
-        document.onkeyup = function (event) {
+        $(document).keyup(function() {
             var letter = event.key;
             var userGuess = letter.toLowerCase();
             var userGuessKeyCode = event.keyCode;
@@ -131,7 +133,7 @@ document.onkeyup = function (event) {
                 }
 
                 displayStats();
-            }
-        }
+            };
+        })
     }
-}
+})
