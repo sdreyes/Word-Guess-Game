@@ -126,9 +126,10 @@ document.onkeyup = function (event) {
                     wins++;
                     image.src = wordChoiceImage;
                     image.className = "text-center";
-                    imageLocText.appendChild(image);
-                    gameOutcomeText.className = "text-success text-center";
-                    gameOutcomeText.textContent = "You win! The answer was " + wordChoice + "!";
+                    $("#image-loc").append(image);
+                    $("#game-outcome-text").removeClass();
+                    $("#game-outcome-text").addClass("text-success text-center");
+                    $("#game-outcome-text").html("You win! The answer was " + wordChoice + "!");
                     resetGame();
                 }
 
@@ -137,9 +138,10 @@ document.onkeyup = function (event) {
                     losses++;
                     image.src = "assets/images/sad.gif";
                     image.className = "text-center";
-                    imageLocText.appendChild(image);
-                    gameOutcomeText.className = "text-danger text-center";
-                    gameOutcomeText.textContent = "You lose! The answer was " + wordChoice + ".";
+                    $("#image-loc").append(image);
+                    $("#game-outcome-text").removeClass();
+                    $("#game-outcome-text").addClass("text-danger text-center");
+                    $("#game-outcome-text").html("You lose! The answer was " + wordChoice + ".");
                     resetGame();
                 }
 
