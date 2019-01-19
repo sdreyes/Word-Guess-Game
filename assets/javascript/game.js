@@ -1,7 +1,4 @@
-
-
 // Dictionary of Pokemon possibilities
-
 const wordChoices = {
     "bulbasaur": "assets/images/bulbasaur.png",
     "caterpie": "assets/images/caterpie.png",
@@ -29,16 +26,6 @@ var losses = 0;
 var guesses
 const maxGuesses = 12;
 
-// Variables that hold text to display
-var wordText = document.getElementById("word-text");
-var wrongGuessesText = document.getElementById("wrongguesses-text");
-var guessesLeftText = document.getElementById("guessesleft-text");
-var winsText = document.getElementById("wins-text");
-var lossesText = document.getElementById("losses-text");
-var instructionsText = document.getElementById("instructions-text");
-var gameOutcomeText = document.getElementById("game-outcome-text");
-var imageLocText = document.getElementById("image-loc");
-
 // Key codes
 const spaceBar = 32;
 const a = 65;
@@ -55,7 +42,7 @@ var wordChoice
 var wordChoiceImage
 
 // Creates an image tag to later hold the Pokemon's picture
-var image = document.createElement("img");
+var image = $("<img>");
 
 // Function that resets the random Pokemon, the guess counter, and the arrays that hold the letters the user has typed
 var resetGame = function() {
@@ -69,19 +56,19 @@ var resetGame = function() {
     wrongGuesses = [];
 
     // Creates an array of underscores to show how many letters are in the word
-    for (var i = 0; i < wordChoice.length; i++) {
+    $.each(wordChoice, function(i, letter) {
         wordLetters.push("_");
-    }
-}
+    });
+};
 
 // Function that displays updated game stats
 var displayStats = function() {
-    wordText.textContent = wordLetters.join(" ");
-    wrongGuessesText.textContent = wrongGuesses.sort().join(" ");
-    guessesLeftText.textContent = maxGuesses - guesses;
-    winsText.textContent = wins;
-    lossesText.textContent = losses;
-}
+    $("#word-text").text(wordLetters.join(" "));
+    $("#wrongguesses-text").text(wrongGuesses.sort().join(" "));
+    $("#guessesleft-text").text(maxGuesses - guesses);
+    $("#wins-text").text(wins);
+    $("#losses-text").text(losses);
+};
 
 document.onkeyup = function (event) {
     var startKeyCode = event.keyCode
@@ -90,7 +77,7 @@ document.onkeyup = function (event) {
 
         resetGame();
         displayStats();
-        instructionsText.textContent = "";
+        $("#instructions-text").text("");
         
         // Evaluate the keys the user types
         document.onkeyup = function (event) {
