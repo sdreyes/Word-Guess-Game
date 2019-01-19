@@ -23,7 +23,7 @@ const wordChoices = {
 // Score related variables
 var wins = 0;
 var losses = 0;
-var guesses
+var guesses;
 const maxGuesses = 12;
 var gameStarted = false;
 
@@ -36,11 +36,11 @@ const z = 90;
 var wordLetters
 
 // Array for letters that are incorrect
-var wrongGuesses
+var wrongGuesses;
 
 // Variables that hold info pulled from the dictionary
-var wordChoice
-var wordChoiceImage
+var wordChoice;
+var wordChoiceImage;
 
 // Creates an image tag to later hold the Pokemon's picture
 var image = $("<img>");
@@ -72,7 +72,7 @@ var displayStats = function() {
 };
 
 $(document).keyup(function() {
-    var startKeyCode = event.keyCode
+    var startKeyCode = event.keyCode;
     // Start the game if the user pressed the spacebar
     if (startKeyCode === spaceBar && gameStarted === false) {
 
@@ -99,8 +99,8 @@ $(document).keyup(function() {
                     // Does not add to the guess count if the letter was previously guessed
                     else if (letter === userGuess && wordLetters[i] === "_") {
                         wordLetters[i] = userGuess;
-                    }
-                })
+                    };
+                });
                 //If the word does not include the letter the user guessed
                 if (!wordChoice.includes(userGuess)) {
 
@@ -109,7 +109,7 @@ $(document).keyup(function() {
                         wrongGuesses.push(userGuess);
                         guesses++;
                     }
-                }
+                };
                 //if the word no longer has blank spaces and the guesses haven't exceeded the max guesses, you win!
                 if (!wordLetters.includes("_") && guesses <= maxGuesses) {
                     wins++;
@@ -130,10 +130,9 @@ $(document).keyup(function() {
                     $("#game-outcome-text").addClass("text-danger text-center");
                     $("#game-outcome-text").html("You lose! The answer was " + wordChoice.join('') + ".");
                     resetGame();
-                }
-
+                };
                 displayStats();
             };
-        })
-    }
-})
+        });
+    };
+});
