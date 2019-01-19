@@ -61,6 +61,7 @@ var image = document.createElement("img");
 var resetGame = function() {
     var random = Math.floor(Math.random() * Object.keys(wordChoices).length);
     wordChoice = Object.keys(wordChoices)[random];
+    wordChoice = wordChoice.split('');
     console.log(wordChoice);
     wordChoiceImage = Object.values(wordChoices)[random];
     wordLetters = [];
@@ -100,18 +101,17 @@ document.onkeyup = function (event) {
             // If the user guesses a letter
             if (userGuessKeyCode >= a && userGuessKeyCode <= z) {
 
-                for (var j = 0; j < wordChoice.length; j++) {
-                    
+                $.each(wordChoice, function(i, letter) {
                     //If the letter is not in the word yet, place it in and add to the guess count
-                    if (wordChoice[j] === userGuess && wordLetters[j] === "_" && !wordLetters.includes(userGuess)) {
-                        wordLetters[j] = userGuess;
+                    if (letter === userGuess && wordLetters[i] === "_" && !wordLetters.includes(userGuess)) {
+                        wordLetters[i] = userGuess;
                         guesses++;
                     }
                     // Does not add to the guess count if the letter was previously guessed
-                    else if (wordChoice[j] === userGuess && wordLetters[j] === "_") {
-                        wordLetters[j] = userGuess;
+                    else if (letter === userGuess && wordLetters[i] === "_") {
+                        wordLetters[i] = userGuess;
                     }
-                }
+                })
                 //If the word does not include the letter the user guessed
                 if (!wordChoice.includes(userGuess)) {
 
@@ -128,7 +128,7 @@ document.onkeyup = function (event) {
                     $("#image-loc").append(image);
                     $("#game-outcome-text").removeClass();
                     $("#game-outcome-text").addClass("text-success text-center");
-                    $("#game-outcome-text").html("You win! The answer was " + wordChoice + "!");
+                    $("#game-outcome-text").html("You win! The answer was " + wordChoice.join('') + "!");
                     resetGame();
                 }
 
@@ -139,7 +139,7 @@ document.onkeyup = function (event) {
                     $("#image-loc").append(image);
                     $("#game-outcome-text").removeClass();
                     $("#game-outcome-text").addClass("text-danger text-center");
-                    $("#game-outcome-text").html("You lose! The answer was " + wordChoice + ".");
+                    $("#game-outcome-text").html("You lose! The answer was " + wordChoice.join('') + ".");
                     resetGame();
                 }
 
